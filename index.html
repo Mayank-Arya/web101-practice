@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign up Page</title>
+  <style>
+      /* Write all necessery css here  */
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <a href="./index.html">Signup</a>
+    <a href="./signin.html">Signin</a>
+  </div>
+  <div id="signup">
+    <h1>Please Enter Your Details</h1>
+    <form>
+      <input type="text" id="name">
+      <input type="email" id="email">
+      <input type="password"  id="password">
+      <input type="submit" value="Submit" />
+    </form>
+  </div>
+</body>
+<script>
+ document.querySelector("form").addEventListener("submit",signup)
+ let arr = JSON.parse(localStorage.getItem("account-data"))||[];
+ function signup(event) {
+event.preventDefault();
+let name = document.querySelector("#name").value;
+let email = document.querySelector("#email").value;
+let password = document.querySelector("#password").value;
+
+let obj = {
+  name,
+  email,
+  password,
+}
+if(obj.name==""){
+  alert("please mention your name")
+  return false;
+
+}
+if(obj.email==""){
+  alert("please mention your email")
+  return false;
+}
+if(obj.password==""){
+  alert("please create a strong password")
+  return false
+}
+arr.push(obj)
+console.log(arr)
+    localStorage.setItem("account-data",JSON.stringify(arr))
+    alert("signup succesfull")
+ }
+ 
+
+ arr.forEach(ele => {
+  if(JSON.parse(localStorage.getItem("account-name")!==null)){
+   alert("credentials already exist,please mention defferent details") 
+  }else{
+    localStorage.setItem("account-data",JSON.stringify(arr))
+  }
+ });
+</script>
+
+</html>
